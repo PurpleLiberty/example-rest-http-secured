@@ -1,0 +1,33 @@
+<server description="Open Liberty REST-0 example">
+
+	<featureManager>
+		<feature>jaxrs-2.1</feature>
+		<feature>jsonp-1.1</feature>
+		<feature>mpJwt-1.1</feature>
+		<feature>mpConfig-1.3</feature>
+		<feature>appSecurity-2.0</feature>
+		<feature>localConnector-1.0</feature>
+	</featureManager>
+
+	<httpEndpoint httpPort="${default.http.port}"
+		httpsPort="${default.https.port}" id="defaultHttpEndpoint" host="*" />
+
+	<mpJwt id="secure_sso" issuer="${SSO_AUTH_SERVER_URL}/realms/master"
+		audiences="master_realm, account" mapToUserRegistry="true"
+		userNameAttribute="preferred_username" groupNameAttribute="" />
+		
+	<webApplication name="SecuredREST"
+		location="rest-http-secured.war" contextRoot="/">
+		<security-role name="example-admin">
+			<user name="alice" />
+		</security-role>
+	</webApplication>
+
+	<basicRegistry>
+		<user name="alice" password="not_used"/>
+		<user name="admin" password="not_used"/>
+		<group name="example-admin">
+			<member name="alice"/>
+		</group>
+	</basicRegistry>
+</server>
