@@ -32,23 +32,23 @@
 
         <http.port>9080</http.port>
         <https.port>9443</https.port>
-      
+
         <version.arquillian-cube>1.18.2</version.arquillian-cube>
         <version.awaitility>4.0.1</version.awaitility>
         <version.fabric8-maven-plugin>4.3.0</version.fabric8-maven-plugin>
         <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
         <version.restassured>4.1.1</version.restassured>
         <version.resteasy>3.6.2.Final</version.resteasy>
-      
+
         <version.keycloak>4.8.3.Final</version.keycloak>
         <version.assertj>3.13.2</version.assertj>
 
-        <fabric8.generator.from>docker.io/openliberty/open-liberty-s2i:19.0.0.9</fabric8.generator.from>    
+        <fabric8.generator.from>docker.io/openliberty/open-liberty-s2i:19.0.0.9</fabric8.generator.from>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-          
+
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -69,18 +69,18 @@
     <dependencies>
         <!-- Open Liberty Features -->
         <dependency>
-                <groupId>jakarta.platform</groupId>
-                <artifactId>jakarta.jakartaee-api</artifactId>
-                <version>8.0.0</version>
-                <scope>provided</scope>
-              </dependency>
-              <dependency>
-                <groupId>org.eclipse.microprofile</groupId>
-                <artifactId>microprofile</artifactId>
-                <version>3.0</version>
-                <type>pom</type>
-                <scope>provided</scope>
-              </dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>8.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>3.0</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
@@ -201,7 +201,7 @@
     <build>
         <finalName>${project.artifactId}</finalName>
 
-        
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -214,25 +214,25 @@
                             <directory>src/main/webapp</directory>
                             <includes>
                                 <include>kc.json</include>
-				<include>META-INF/microprofile-config.properties</include>
+                                <include>META-INF/microprofile-config.properties</include>
                             </includes>
                         </resource>
                     </webResources>
 
                 </configuration>
                 <executions>
-                        <execution>
-                            <id>default-war</id>
-                            <phase>none</phase>
-                        </execution>
-                        <execution>
-                            <id>war</id>
-                            <phase>generate-test-resources</phase>
-                            <goals>
-                                <goal>war</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <execution>
+                        <id>default-war</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>war</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
 
             </plugin>
             <!-- Enable liberty-maven plugin -->
@@ -241,7 +241,7 @@
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>3.1</version>
 
-                <configuration>                   
+                <configuration>
                     <bootstrapProperties>
                         <default.http.port>${http.port}</default.http.port>
                         <default.https.port>${https.port}</default.https.port>
@@ -256,14 +256,14 @@
                             <goal>create</goal>
                             <goal>install-feature</goal>
                             <goal>deploy</goal>
-                        </goals>                    
+                        </goals>
                     </execution>
                     <execution>
                         <id>package</id>
-                        <goals>                          
+                        <goals>
                             <goal>package</goal>
                         </goals>
-                        <configuration>                        
+                        <configuration>
                             <packageName>rest-http-secured-openliberty</packageName>
                             <include>runnable</include>
                         </configuration>
